@@ -1,0 +1,7 @@
+[user]
+	name = Masashige-T
+	email = masashige.takeuchi.me@gmail.com
+[init]
+	defaultBranch = main
+[core]
+	excludesfile = ~/.gitignore_global

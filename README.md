@@ -7,13 +7,15 @@ git clone git@github.com:Masashige-T/dotfiles.git ~/Desktop/dotfiles
 cd ~/Desktop/dotfiles
 ```
 
-### Bash 設定
+### シンボリックリンク
 
-既存ファイルは `.bak` にバックアップされる。
+Bash 設定と Git 設定をホームディレクトリにリンクする。既存ファイルは `.bak` にバックアップされる。
 
 ```bash
 ./setup.sh
 ```
+
+対象: `.bash_profile`, `.bashrc`, `.gitconfig`, `.gitignore_global`
 
 ### Homebrew パッケージ
 

@@ -3,7 +3,7 @@
 
 DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-files=(.bash_profile .bashrc)
+files=(.bash_profile .bashrc .gitconfig .gitignore_global)
 
 for file in "${files[@]}"; do
   target="$HOME/$file"
