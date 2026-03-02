@@ -4,6 +4,7 @@ tap "supabase/tap"
 
 # CLI tools
 brew "bash-completion"
+brew "git"
 brew "awscli"
 brew "gh"
 brew "jq"
