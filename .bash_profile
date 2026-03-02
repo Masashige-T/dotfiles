@@ -25,6 +25,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # -- OrbStack --
 source ~/.orbstack/shell/init.bash 2>/dev/null || :
 
+# -- Bash Completion --
+[[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+
 # -- Interactive shell settings --
 if [ -f ~/.bashrc ]; then
   source ~/.bashrc

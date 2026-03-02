@@ -3,6 +3,7 @@ tap "ngrok/ngrok"
 tap "supabase/tap"
 
 # CLI tools
+brew "bash-completion"
 brew "awscli"
 brew "gh"
 brew "jq"
