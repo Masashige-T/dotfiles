@@ -1,0 +1,29 @@
+# Ghostty configuration for cmux
+# Docs: https://ghostty.org/docs/config
+
+# -- Font --
+font-family = JetBrains Mono
+font-size = 14
+
+# -- CJK / Japanese fallback font --
+font-codepoint-map = U+3000-U+9FFF,U+F900-U+FAFF,U+FF00-U+FFEF=Hiragino Sans
+
+# -- Theme --
+theme = Tokyo Night
+
+# -- Window --
+window-padding-x = 8
+window-padding-y = 4
+
+# -- Scrollback --
+scrollback-limit = 50000
+
+# -- Cursor --
+cursor-style = bar
+cursor-style-blink = false
+
+# -- Shell --
+command = /bin/bash --login
+
+# -- Misc --
+confirm-close-surface = false

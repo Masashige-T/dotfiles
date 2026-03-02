@@ -15,6 +15,17 @@ for file in "${files[@]}"; do
   echo "Linked $file"
 done
 
+# -- Ghostty (cmux) config --
+ghostty_dir="$HOME/.config/ghostty"
+ghostty_target="$ghostty_dir/config"
+mkdir -p "$ghostty_dir"
+if [ -e "$ghostty_target" ] && [ ! -L "$ghostty_target" ]; then
+  echo "Backing up existing ghostty/config -> config.bak"
+  mv "$ghostty_target" "$ghostty_target.bak"
+fi
+ln -sf "$DOTFILES_DIR/ghostty/config" "$ghostty_target"
+echo "Linked ghostty/config"
+
 # Remove obsolete .profile if it exists and is not a symlink
 if [ -f "$HOME/.profile" ] && [ ! -L "$HOME/.profile" ]; then
   mv "$HOME/.profile" "$HOME/.profile.bak"
