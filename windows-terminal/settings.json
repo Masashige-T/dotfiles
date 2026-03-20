@@ -1,0 +1,58 @@
+{
+    "$help": "https://aka.ms/terminal-documentation",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+    "profiles": {
+        "defaults": {
+            "font": {
+                "face": "JetBrainsMono Nerd Font",
+                "size": 14
+            },
+            "colorScheme": "Tokyo Night",
+            "opacity": 90,
+            "useAcrylic": false,
+            "padding": "8, 4, 8, 4",
+            "scrollbarState": "hidden",
+            "cursorShape": "bar"
+        },
+        "list": [
+            {
+                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+                "name": "Ubuntu",
+                "source": "Windows.Terminal.Wsl",
+                "commandline": "wsl.exe -d Ubuntu --cd ~"
+            }
+        ]
+    },
+    "schemes": [
+        {
+            "name": "Tokyo Night",
+            "background": "#1A1B2E",
+            "foreground": "#A9B1D6",
+            "selectionBackground": "#33467C",
+            "cursorColor": "#7AA2F7",
+            "black": "#15161E",
+            "red": "#F7768E",
+            "green": "#9ECE6A",
+            "yellow": "#E0AF68",
+            "blue": "#7AA2F7",
+            "purple": "#BB9AF7",
+            "cyan": "#7DCFFF",
+            "white": "#A9B1D6",
+            "brightBlack": "#414868",
+            "brightRed": "#F7768E",
+            "brightGreen": "#9ECE6A",
+            "brightYellow": "#E0AF68",
+            "brightBlue": "#7AA2F7",
+            "brightPurple": "#BB9AF7",
+            "brightCyan": "#7DCFFF",
+            "brightWhite": "#C0CAF5"
+        }
+    ],
+    "actions": [
+        { "command": "paste", "keys": "ctrl+v" },
+        { "command": { "action": "copy", "singleLine": false }, "keys": "ctrl+c" },
+        { "command": { "action": "splitPane", "split": "auto" }, "keys": "alt+shift+d" },
+        { "command": "find", "keys": "ctrl+shift+f" }
+    ]
+}

@@ -1,0 +1,6 @@
+#!/bin/bash
+if [[ "$1" == "-s" ]]; then
+  echo "Linux"
+else
+  /usr/bin/uname "$@"
+fi
