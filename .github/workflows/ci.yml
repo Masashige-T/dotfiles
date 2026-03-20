@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ShellCheck
+        run: sudo apt-get install -y shellcheck
+
+      - name: Install bats-core
+        run: sudo apt-get install -y bats
+
+      - name: Install taplo
+        run: |
+          curl -fsSL https://github.com/tamasfe/taplo/releases/latest/download/taplo-linux-x86_64.gz \
+            | gunzip > /usr/local/bin/taplo
+          chmod +x /usr/local/bin/taplo
+
+      - name: ShellCheck
+        run: shellcheck setup.sh .bash_profile .bashrc
+
+      - name: taplo (TOML validation)
+        run: taplo check starship.toml
+
+      - name: bats (tests)
+        run: bats test/

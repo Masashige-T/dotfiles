@@ -23,6 +23,11 @@ brew "rbenv"
 brew "postgresql@14"
 brew "redis", restart_service: :changed
 
+# Lint / Test
+brew "shellcheck"
+brew "bats-core"
+brew "taplo"
+
 # Infrastructure
 brew "tfenv"
 
