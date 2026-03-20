@@ -3,6 +3,7 @@ tap "ngrok/ngrok"
 tap "supabase/tap"
 
 # CLI tools
+brew "bash"
 brew "bash-completion"
 brew "git"
 brew "awscli"
@@ -10,6 +11,7 @@ brew "gh"
 brew "jq"
 brew "mkcert"
 brew "nss"
+brew "starship"
 brew "tree"
 brew "uv"
 
@@ -23,6 +25,9 @@ brew "redis", restart_service: :changed
 
 # Infrastructure
 brew "tfenv"
+
+# Fonts
+cask "font-jetbrains-mono-nerd-font"
 
 # GUI apps
 cask "ngrok"
