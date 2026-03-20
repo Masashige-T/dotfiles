@@ -15,7 +15,7 @@ for file in "${files[@]}"; do
   echo "Linked $file"
 done
 
-# -- Ghostty (cmux) config --
+# -- Ghostty config --
 ghostty_dir="$HOME/.config/ghostty"
 ghostty_target="$ghostty_dir/config"
 mkdir -p "$ghostty_dir"
