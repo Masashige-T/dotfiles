@@ -28,6 +28,11 @@ if [[ -d "$HOME/.rbenv" ]]; then
   eval "$(rbenv init -)"
 fi
 
+# -- Terraform (tfenv) --
+if [[ -d "$HOME/.tfenv" ]]; then
+  export PATH="$HOME/.tfenv/bin:$PATH"
+fi
+
 # -- Node (Volta) --
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"

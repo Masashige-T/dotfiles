@@ -50,4 +50,10 @@ if [ -f "$HOME/.profile" ] && [ ! -L "$HOME/.profile" ]; then
   echo "Backed up and removed obsolete .profile -> .profile.bak"
 fi
 
+# -- Package installation hint (Linux) --
+if [[ "$_OS" == "linux" ]]; then
+  echo ""
+  echo "Run ./install-packages-linux.sh to install CLI tools (apt + installers)"
+fi
+
 echo "Done!"
