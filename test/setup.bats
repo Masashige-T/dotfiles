@@ -73,7 +73,7 @@ assert_success() {
   [ "$(readlink "$HOME/.config/starship.toml")" = "$DOTFILES_DIR/starship.toml" ]
 }
 
-@test "WSL2 で Windows Terminal settings.json がリンクされること" {
+@test "WSL2 で Windows Terminal settings.json がコピーされること" {
   # uname スタブで Linux を偽装
   STUB_DIR="$(mktemp -d)"
   cp "$DOTFILES_DIR/test/stubs/uname-linux" "$STUB_DIR/uname"
@@ -89,8 +89,12 @@ assert_success() {
   run env DOTFILES_DIR="$DOTFILES_DIR" PATH="$STUB_DIR:$PATH" bash "$STUB_DIR/setup.sh"
   assert_success
 
-  [ -L "$fake_wt_dir/settings.json" ]
-  [ "$(readlink "$fake_wt_dir/settings.json")" = "$DOTFILES_DIR/windows-terminal/settings.json" ]
+  # シンボリックリンクではなくコピーであること
+  [ -f "$fake_wt_dir/settings.json" ]
+  [ ! -L "$fake_wt_dir/settings.json" ]
+  diff -q "$DOTFILES_DIR/windows-terminal/settings.json" "$fake_wt_dir/settings.json"
+  # 元ファイルがバックアップされていること
+  [ -f "$fake_wt_dir/settings.json.bak" ]
 }
 
 @test "WSL2 で Windows Terminal ディレクトリが存在しない場合スキップされること" {

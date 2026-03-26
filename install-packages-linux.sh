@@ -85,4 +85,33 @@ if ! command -v taplo &>/dev/null; then
   echo "Installed taplo"
 fi
 
+# -- JetBrainsMono Nerd Font (install to Windows user fonts for Windows Terminal) --
+if [[ -d "/mnt/c/Windows" ]]; then
+  win_localappdata="$(cmd.exe /C "echo %LOCALAPPDATA%" 2>/dev/null | tr -d '\r')"
+  win_fonts_wsl="$(wslpath "$win_localappdata")/Microsoft/Windows/Fonts"
+  if ! ls "$win_fonts_wsl"/JetBrainsMonoNerdFont* &>/dev/null 2>&1; then
+    tmpdir="$(mktemp -d)"
+    curl -fsSL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.tar.xz \
+      -o "$tmpdir/JetBrainsMono.tar.xz"
+    mkdir -p "$tmpdir/font"
+    tar -xf "$tmpdir/JetBrainsMono.tar.xz" -C "$tmpdir/font"
+    mkdir -p "$win_fonts_wsl"
+    cp "$tmpdir"/font/*.ttf "$win_fonts_wsl/"
+    # Register fonts via PowerShell (current user, no admin required)
+    win_fonts_dir="${win_localappdata}\\Microsoft\\Windows\\Fonts"
+    for ttf in "$tmpdir"/font/*.ttf; do
+      fname="$(basename "$ttf")"
+      powershell.exe -NoProfile -Command \
+        "New-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Fonts' \
+        -Name '${fname%.ttf} (TrueType)' -Value '${win_fonts_dir}\\${fname}' -PropertyType String -Force" \
+        >/dev/null 2>&1
+    done
+    rm -rf "$tmpdir"
+    echo "Installed JetBrainsMono Nerd Font to Windows (user fonts)"
+    echo "NOTE: Restart Windows Terminal for the font to appear"
+  else
+    echo "JetBrainsMono Nerd Font already installed"
+  fi
+fi
+
 echo "All packages installed!"

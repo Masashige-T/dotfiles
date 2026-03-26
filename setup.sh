@@ -51,7 +51,13 @@ if [[ "$_OS" == "linux" ]]; then
     done
   fi
   if [ -n "$wt_target" ]; then
-    link_file "$DOTFILES_DIR/windows-terminal/settings.json" "$wt_target"
+    # WSL symlinks are not visible from Windows — copy instead
+    if [ -e "$wt_target" ] && [ ! -L "$wt_target" ]; then
+      cp "$wt_target" "$wt_target.bak"
+      echo "Backing up existing settings.json -> settings.json.bak"
+    fi
+    cp "$DOTFILES_DIR/windows-terminal/settings.json" "$wt_target"
+    echo "Copied Windows Terminal settings.json"
   else
     echo "Skipped Windows Terminal: settings directory not found"
   fi

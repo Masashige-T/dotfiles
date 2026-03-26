@@ -4,8 +4,8 @@
     "actions": [],
     "copyFormatting": "none",
     "copyOnSelect": false,
-    "defaultProfile": "{14e9b553-aef6-55e6-b784-31dee6ccc7e4}",
-    "keybindings":
+    "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+    "keybindings": 
     [
         {
             "id": "Terminal.CopyToClipboard",
@@ -18,35 +18,18 @@
         {
             "id": "Terminal.DuplicatePaneAuto",
             "keys": "alt+shift+d"
-        },
-        {
-            "id": "Terminal.FindText",
-            "keys": "ctrl+shift+f"
         }
     ],
-    "newTabMenu":
+    "newTabMenu": 
     [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles":
+    "profiles": 
     {
-        "defaults":
-        {
-            "font":
-            {
-                "face": "JetBrainsMono Nerd Font",
-                "size": 14
-            },
-            "colorScheme": "Tokyo Night",
-            "opacity": 90,
-            "useAcrylic": false,
-            "padding": "8, 4, 8, 4",
-            "scrollbarState": "hidden",
-            "cursorShape": "bar"
-        },
-        "list":
+        "defaults": {},
+        "list": 
         [
             {
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
@@ -74,31 +57,6 @@
             }
         ]
     },
-    "schemes":
-    [
-        {
-            "name": "Tokyo Night",
-            "background": "#1A1B2E",
-            "foreground": "#A9B1D6",
-            "selectionBackground": "#33467C",
-            "cursorColor": "#7AA2F7",
-            "black": "#15161E",
-            "red": "#F7768E",
-            "green": "#9ECE6A",
-            "yellow": "#E0AF68",
-            "blue": "#7AA2F7",
-            "purple": "#BB9AF7",
-            "cyan": "#7DCFFF",
-            "white": "#A9B1D6",
-            "brightBlack": "#414868",
-            "brightRed": "#F7768E",
-            "brightGreen": "#9ECE6A",
-            "brightYellow": "#E0AF68",
-            "brightBlue": "#7AA2F7",
-            "brightPurple": "#BB9AF7",
-            "brightCyan": "#7DCFFF",
-            "brightWhite": "#C0CAF5"
-        }
-    ],
+    "schemes": [],
     "themes": []
 }
