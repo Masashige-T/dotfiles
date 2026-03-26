@@ -73,6 +73,39 @@ assert_success() {
   [ "$(readlink "$HOME/.config/starship.toml")" = "$DOTFILES_DIR/starship.toml" ]
 }
 
+@test "WSL2 で Windows Terminal settings.json がリンクされること" {
+  # uname スタブで Linux を偽装
+  STUB_DIR="$(mktemp -d)"
+  cp "$DOTFILES_DIR/test/stubs/uname-linux" "$STUB_DIR/uname"
+
+  # 偽の Windows Terminal ディレクトリを /mnt/c/Users 相当に作成
+  fake_wt_dir="$TEST_HOME/mnt_c/Users/testuser/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState"
+  mkdir -p "$fake_wt_dir"
+  echo '{"existing": true}' > "$fake_wt_dir/settings.json"
+
+  # setup.sh 内の /mnt/c/Users を偽パスに差し替えて実行
+  sed "s|/mnt/c/Users|$TEST_HOME/mnt_c/Users|" "$DOTFILES_DIR/setup.sh" > "$STUB_DIR/setup.sh"
+
+  run env DOTFILES_DIR="$DOTFILES_DIR" PATH="$STUB_DIR:$PATH" bash "$STUB_DIR/setup.sh"
+  assert_success
+
+  [ -L "$fake_wt_dir/settings.json" ]
+  [ "$(readlink "$fake_wt_dir/settings.json")" = "$DOTFILES_DIR/windows-terminal/settings.json" ]
+}
+
+@test "WSL2 で Windows Terminal ディレクトリが存在しない場合スキップされること" {
+  STUB_DIR="$(mktemp -d)"
+  cp "$DOTFILES_DIR/test/stubs/uname-linux" "$STUB_DIR/uname"
+
+  # /mnt/c/Users が存在しない状態で実行
+  sed "s|/mnt/c/Users|$TEST_HOME/nonexistent|" "$DOTFILES_DIR/setup.sh" > "$STUB_DIR/setup.sh"
+
+  run env DOTFILES_DIR="$DOTFILES_DIR" PATH="$STUB_DIR:$PATH" bash "$STUB_DIR/setup.sh"
+  assert_success
+
+  [[ "$output" == *"Skipped Windows Terminal"* ]]
+}
+
 @test "既存ファイルが .bak にバックアップされること" {
   echo "old content" > "$HOME/.bash_profile"
 

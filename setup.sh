@@ -1,7 +1,7 @@
 #!/bin/bash
 # Symlink dotfiles to home directory
 
-DOTFILES_DIR="$(cd "$(dirname "$0")" && pwd)"
+DOTFILES_DIR="${DOTFILES_DIR:-$(cd "$(dirname "$0")" && pwd)}"
 
 # -- OS detection --
 case "$(uname -s)" in
@@ -35,6 +35,27 @@ fi
 
 # -- Starship config --
 link_file "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml"
+
+# -- Windows Terminal config (WSL2 only) --
+if [[ "$_OS" == "linux" ]]; then
+  wt_base="/mnt/c/Users"
+  wt_package="Microsoft.WindowsTerminal_8wekyb3d8bbwe"
+  wt_target=""
+  if [ -d "$wt_base" ]; then
+    for user_dir in "$wt_base"/*/; do
+      candidate="${user_dir}AppData/Local/Packages/${wt_package}/LocalState/settings.json"
+      if [ -d "$(dirname "$candidate")" ]; then
+        wt_target="$candidate"
+        break
+      fi
+    done
+  fi
+  if [ -n "$wt_target" ]; then
+    link_file "$DOTFILES_DIR/windows-terminal/settings.json" "$wt_target"
+  else
+    echo "Skipped Windows Terminal: settings directory not found"
+  fi
+fi
 
 # -- Shell completions --
 if command -v brew &>/dev/null; then
